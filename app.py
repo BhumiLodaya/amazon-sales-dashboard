@@ -2,9 +2,18 @@ import pandas as pd
 import plotly.express as px
 import dash
 from dash import html, dcc
+import os  # 👈 added for debugging
 
-# Load dataset
-df = pd.read_csv("sales_cleaned.csv")
+# 🔍 STEP 1: Add this block to print file status in Render logs
+print("✅ Current directory contents:", os.listdir())
+
+try:
+    df = pd.read_csv("sales_cleaned.csv")
+    print("✅ CSV Loaded Successfully")
+    print("Columns:", df.columns.tolist())
+except Exception as e:
+    print("❌ CSV Load Failed:", e)
+    df = pd.DataFrame()  # Fallback to avoid crash
 
 # Start Dash app
 app = dash.Dash(__name__)
