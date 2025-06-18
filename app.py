@@ -5,8 +5,10 @@ from dash import html, dcc
 
 # Load dataset
 df = pd.read_csv("sales_cleaned.csv")
+
 # Start Dash app
 app = dash.Dash(__name__)
+server = app.server  # ✅ Expose server for Render to find
 
 # Layout
 app.layout = html.Div(style={'backgroundColor': '#111111', 'color': '#FFFFFF', 'padding': '20px'}, children=[
@@ -61,10 +63,10 @@ app.layout = html.Div(style={'backgroundColor': '#111111', 'color': '#FFFFFF', '
     ),
     html.P("🌐 This chart shows which sales channels (like Amazon.in, Amazon.com, etc.) contribute the most to revenue."),
 
-    # Footer
     html.H3("💡 More Insights Coming Soon!", style={'marginTop': '40px'}),
     html.P("Additional dashboards like Product Performance, Customer Return Rate, and Region-wise Profitability will be added.")
 ])
 
+# Optional for local development — safe for Render
 if __name__ == '__main__':
     app.run(debug=True)
